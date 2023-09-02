@@ -46,7 +46,7 @@ WITH temp_table AS (
     SELECT t1.EmployeeId, FullName, BirthDate, Address, PosId, PosTitle, StartDate, EndDate, 
 	DENSE_RANK() OVER (PARTITION BY FullName ORDER BY StartDate DESC) AS ranking
     FROM Employee t1
-    JOIN PositionHistory t2 ON t1.EmployeeId = t2.EmployeeId
+    LEFT JOIN PositionHistory t2 ON t1.EmployeeId = t2.EmployeeId
 )
 SELECT EmployeeId, FullName, BirthDate, Address, PosId, PosTitle, StartDate, EndDate
 FROM temp_table
